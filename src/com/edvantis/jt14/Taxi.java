@@ -1,6 +1,7 @@
 package com.edvantis.jt14;
 
-import com.edvantis.jt14.data.OrdersDB;
+import com.edvantis.jt14.data.*;
+import com.edvantis.jt14.workers.*;
 
 
 
@@ -13,18 +14,25 @@ public class Taxi {
 		
 				
 		
-		OrdersDB orderDB1 = new OrdersDB();
-		orderDB1.orderAdd(orderDB1.newOrder());
-		orderDB1.orderAdd(orderDB1.newOrder());
-		orderDB1.orderAdd(orderDB1.newOrder());
-		orderDB1.orderAdd(orderDB1.newOrder());
-		orderDB1.orderAdd(orderDB1.newOrder());
+		OrdersDB ordersDB1 = OrdersDB.getReference();
+		
+		
+		ordersDB1.orderAdd(ordersDB1.newOrder());
+		ordersDB1.orderAdd(ordersDB1.newOrder());
+		ordersDB1.orderAdd(ordersDB1.newOrder());
+		ordersDB1.orderAdd(ordersDB1.newOrder());
+		ordersDB1.orderAdd(ordersDB1.newOrder());
 
 		
 		
-		System.out.println(orderDB1.orders.size());
+//		System.out.println(ordersDB1.getOrdersDBSize());
 		
-		orderDB1.printAll();
+		
+		
+//		ordersDB1.printAll();
+		
+		Manager man1=new Manager();
+		man1.doReportWithOrders();
 		
 	}
 

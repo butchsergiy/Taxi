@@ -11,20 +11,35 @@ import java.util.List;
 
 public class OrdersDB implements OrdersDBInterface{
 
-	public List<Order> orders=new LinkedList<>();
+	private static OrdersDB s=new OrdersDB();			// Singleton 
+	
+	private List<Order> orders=new LinkedList<>();
 		
-	// constructor #1 - If created object of this class without parameters it meens that
-	// will be created object in RAM with all records from OrdersDB.
-	public OrdersDB(){
+		
+// constructor #1 - If created object of this class without parameters it meens that
+// will be created object in RAM with all records from OrdersDB.
+	private OrdersDB(){
 				
 	}
 	
 	
-	// constructor #2 - for that case when we need to work 
-	// with data of specific period
-	public OrdersDB(LocalDate Date1, LocalDate Date2) {
-				
+// constructor #2 - for that case when we need to work 
+// with data of specific period
+//	public OrdersDB(LocalDate Date1, LocalDate Date2) {
+//				
+//	}
+	
+	public static OrdersDB getReference(){
+		return s;
 	}
+	
+	
+	public int getOrdersDBSize(){
+		return s.orders.size();
+	}
+	
+	
+	
 	
 	
 	public void orderAdd(Order order) {
