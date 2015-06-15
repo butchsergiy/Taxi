@@ -7,9 +7,11 @@ import com.edvantis.jt.case14.exceptions.WorkerExceptions;
 public abstract class WorkersAbs implements WorkersInterface {
 
 	
-	abstract public void workerAdd(Worker w) throws WorkerExceptions;
+	public abstract void workerAdd(Worker w) throws WorkerExceptions;
 
-	abstract public void workersPrint();
+	public abstract void workersPrint();
+
+	public abstract void workerDel(long id);
 	
 
 

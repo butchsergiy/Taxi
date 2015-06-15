@@ -26,17 +26,15 @@ public class Manager extends Worker implements WorkersInterface{
 		
 		}
 
-	OrdersDB a=OrdersDB.getReference();
+	OrdersDB 	o =	OrdersDB.getReference();
+	WorkersDB 	w =	WorkersDB.getReference();
+	
+	
 	
 	
 	public void doReportWithOrders() {
-		a.printAll();
+		o.printAll();
 		}
-	
-	
-	public void doReportWithWorkers() {
-		
-	}
 	
 	
 /////////////////////////////////////////////////////////////////////////
@@ -53,29 +51,32 @@ public class Manager extends Worker implements WorkersInterface{
 		w.setAccessLevel(1);
 		w.setPassword("");
 		w.setLogget(false);
-		
-		
+				
 		return w;
 	}
 
 	
-	@Override
-	public void workerDel() {
-		// TODO Auto-generated method stub
+	
+	public void workerDel(long id) {
+		w.workerDel(id);
 		
 	}
 
 
 	@Override
 	public void workersPrint() {
-		// TODO Auto-generated method stub
-		
+		// future will show if we do need this method		
 	}
 
 
 	@Override
 	public void workerAdd(Worker w) {
+		// future will show if we do need this method
 
+	}
+	
+	public void doReportWithWorkers() {
+		// future will show if we do need this method
 	}
 	
 }

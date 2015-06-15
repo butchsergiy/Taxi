@@ -1,19 +1,23 @@
 package com.edvantis.jt.case14.model.workers;
 
 import java.time.Period;
-
+import com.edvantis.jt.case14.model.data.OrdersDB;
 
 
 
 public class OperatorMain extends OperatorSimple{
 
+	OrdersDB 	o =	OrdersDB.getReference();
 	
-// Main operator can olso print report for some period, e.g. day, week... 	
-	public void makeReport(Period p) {
+	public void orderDel(int id){
+		o.orderDel(id);
 		
 	}
 	
-	public void orderDel(){
-		
+	
+	
+	// Main operator can olso print report for some period, e.g. day, week... 	
+	public void makeReport(Period p) {
+		// future will show if we do need this method
 	}
 }

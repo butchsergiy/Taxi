@@ -45,13 +45,19 @@ public class OrdersDB implements OrdersDBInterface{
 		// here need to add command to save new order to DB 
 	}
 
-	public void orderDel(int number) {
+	public void orderDel(int id) {
+		for(Order o: orders){
+			if (o.getOrderID()==id) orders.remove(o);
+		}
 				
 	}
 
 
 	@Override
-	public Order orderGet(int number) {
+	public Order orderGet(int id) {
+		for(Order o: orders){
+			if(o.getOrderID()==id) return o;
+		}
 		return null;	
 	}
 
