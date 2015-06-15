@@ -1,5 +1,7 @@
 package com.edvantis.jt.case14.model.workers;
 
+import com.edvantis.jt.case14.model.data.Order;
+
 /**
  *  Abstract class for operators.
  *  they can create new order
@@ -11,7 +13,7 @@ package com.edvantis.jt.case14.model.workers;
 
 public abstract class OperatorAbs extends Worker {
 
-	abstract public void orderAdd();
+	abstract public Order orderCreate();
 	abstract public void orderGetList();
 	abstract public void orderChange(int orderNumber);
 	

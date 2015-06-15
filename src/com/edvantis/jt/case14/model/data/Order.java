@@ -7,7 +7,7 @@ public class Order {
 
 // all fields of object of class Order:
 	
-	private int orderNum;
+	private int orderID;
 	private LocalDateTime dateAndTime;
 	private String addr1, addr2, addr34;
 	private float distance;
@@ -21,12 +21,12 @@ public class Order {
 	
 	
 	
-	public int getOrderNum() {
-		return orderNum;
+	public int getOrderID() {
+		return orderID;
 	}
 	
-	public void setOrderNum(int orderNum) {
-		this.orderNum = orderNum;
+	public void setOrderID(int orderNum) {
+		this.orderID = orderNum;
 	}
 	
 	public LocalDateTime getDateAndTime() {
