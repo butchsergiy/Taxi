@@ -11,6 +11,7 @@ import com.edvantis.jt.case14.model.workers.*;
 
 
 
+
 public class Taxi {
 
 	public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class Taxi {
 		OrdersDB 	ordersDB0 = 	OrdersDB.getReference();
 		WorkersDB 	workersDB0 =	WorkersDB.getReference();
 		
-
+		WorkWithMySql.ReadAllFromMySQLordersDB();
 		
 //////////////////////////////////////////////////////////////////////////////////////////////
 // WORKERS

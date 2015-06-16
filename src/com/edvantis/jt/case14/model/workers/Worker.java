@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Worker  {
 
-	private long 	idNumber;
+	private long 	id;
 	private String 	name;
 	private String 	position;
 	private LocalDate birthDate;
@@ -18,11 +18,11 @@ public class Worker  {
 	
 	
 	
-	public long getIdNumber() {
-		return idNumber;
+	public long getId() {
+		return id;
 	}
-	public void setIdNumber(long idNumber) {
-		this.idNumber = idNumber;
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	public String getName() {

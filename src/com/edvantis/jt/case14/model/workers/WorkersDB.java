@@ -9,7 +9,7 @@ import com.edvantis.jt.case14.validator.WorkerValidator;
 
 
 
-public class WorkersDB extends WorkersAbs{
+public class WorkersDB extends WorkersDBAbstract{
 
 	private static WorkersDB w=new WorkersDB();				// Singeton
 	
@@ -38,7 +38,7 @@ public class WorkersDB extends WorkersAbs{
 	@Override
 	public void workerDel(long id) {
 		for(Worker w: workers){
-			if(w.getIdNumber()==id) workers.remove(w);
+			if(w.getId()==id) workers.remove(w);
 		}
 
 	}
@@ -47,7 +47,7 @@ public class WorkersDB extends WorkersAbs{
 	@Override
 	public void workerAdd(Worker w) throws WorkerExceptions {
 		WorkerValidator.workerDataIsValid(w);
-		System.out.println("ID: "+ w.getIdNumber() + ", Worker: " + w.getName()+ ", added to the Workers DB.\n");
+		System.out.println("ID: "+ w.getId() + ", Worker: " + w.getName()+ ", added to the Workers DB.\n");
 		workers.add(w);	
 	}
 	
@@ -58,7 +58,7 @@ public class WorkersDB extends WorkersAbs{
 		System.out.println("\n We have "+ workers.size() + " workers:");
 		for(Worker w: workers){
 			System.out.println();
-			System.out.println(" worker ID number:\t"+w.getIdNumber());
+			System.out.println(" worker ID number:\t"+w.getId());
 			System.out.println(" worker Name:\t\t"+ w.getName());
 			System.out.println(" worker possition:\t" + w.getPosition() );
 			System.out.println(" worker birthday:\t" + w.getBirthDate() );

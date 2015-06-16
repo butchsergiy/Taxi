@@ -9,7 +9,7 @@ import com.edvantis.jt.case14.validator.OrderValidator;
 
 public class OrdersDB implements OrdersDBInterface{
 
-	private static OrdersDB s=new OrdersDB();			// Singleton 
+	private static final OrdersDB s=new OrdersDB();			// Singleton 
 	private List<Order> orders=new LinkedList<>();
 		
 		

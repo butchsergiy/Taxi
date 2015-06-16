@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import com.edvantis.jt.case14.model.data.*;
 
 
-public class Manager extends Worker implements WorkersInterface{
+public class Manager extends Worker implements WorkersDBInterface{
 
 /**
  *  Manager can:
@@ -17,7 +17,7 @@ public class Manager extends Worker implements WorkersInterface{
 // Constructor #1.	
 	public Manager(int id, String name, String pos) {
 		
-		this.setIdNumber(id);
+		this.setId(id);
 		this.setName(name);
 		this.setPosition(pos);
 //		
@@ -44,7 +44,7 @@ public class Manager extends Worker implements WorkersInterface{
 // But now I just simulate that process.
 	public Worker workerCreateTemp(){
 		Worker w=new Worker();
-		w.setIdNumber((int)(Math.random() * 100000000));
+		w.setId((int)(Math.random() * 100000000));
 		w.setName("Oleg_" + ((int) (Math.random() * 100)));
 		w.setBirthDate(LocalDate.parse("1980-01-01"));
 		w.setPosition(WorkersDB.positions[(int)(Math.random()*3)]);

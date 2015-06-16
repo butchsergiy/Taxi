@@ -4,7 +4,7 @@ import com.edvantis.jt.case14.exceptions.WorkerExceptions;
 
 
 
-public abstract class WorkersAbs implements WorkersInterface {
+public abstract class WorkersDBAbstract implements WorkersDBInterface {
 
 	
 	public abstract void workerAdd(Worker w) throws WorkerExceptions;
