@@ -1,10 +1,12 @@
 package com.edvantis.jt.case14.model.workers;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+
 import com.edvantis.jt.case14.model.data.Order;
 
 
-public class OperatorSimple extends OperatorAbs {
+public class OperatorSimple extends OperatorAbstract {
 
 
 // temporary method that simulares how operator creates new TaxiOrder
@@ -14,7 +16,7 @@ public class OperatorSimple extends OperatorAbs {
 
 		// data generator
 
-		o.setDateAndTime(LocalDateTime.now());
+		o.setDateAndTime(Timestamp.valueOf(LocalDateTime.now()));
 		o.setOrderID((int)(Math.random() * 1000));
 		o.setAddr1("From: Volodymyra " + ((int) (Math.random() * 200)));
 		o.setAddr2("To: Chernivetska " + ((int) (Math.random() * 200)));

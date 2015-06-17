@@ -21,15 +21,13 @@ public class OrdersDB implements OrdersDBInterface{
 	public static OrdersDB getReference(){
 		return s;
 	}
+
 	
-//////////////////////////////////////////////////////////////////////////
-	
-// to do method - for that case when we need to work 
-// with data of specific period
-//	public OrdersDB getOrdersForPeriod(LocalDate Date1, LocalDate Date2) {..}
-//				
-	
-	
+/*
+ *  to do method - for that case when we need to work 
+ * with data of specific period
+ * public OrdersDB getOrdersForPeriod(LocalDate Date1, LocalDate Date2) {..}	
+ */
 	
 	public int getOrdersDBSize(){
 		return s.orders.size();

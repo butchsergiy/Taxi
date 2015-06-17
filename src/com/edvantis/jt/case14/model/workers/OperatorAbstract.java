@@ -11,7 +11,7 @@ import com.edvantis.jt.case14.model.data.Order;
 
 
 
-public abstract class OperatorAbs extends Worker {
+public abstract class OperatorAbstract extends Worker {
 
 	abstract public Order orderCreate();
 	abstract public void orderGetList();

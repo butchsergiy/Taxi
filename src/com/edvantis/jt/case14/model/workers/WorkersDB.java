@@ -15,7 +15,7 @@ public class WorkersDB extends WorkersDBAbstract{
 	
 	private List<Worker> workers=new LinkedList<>();
 	
-	public static String[] positions={"Manager", "simple Operator", "main Operator", "Driver"};
+	public static final String[] positions={"Manager", "simple Operator", "main Operator", "Driver"};
 	
 // constructor #1 	
 	private WorkersDB() {
@@ -26,8 +26,6 @@ public class WorkersDB extends WorkersDBAbstract{
 		
 		return w;
 	}
-	
-//////////////////////////////////////////////////////////////////////////	
 	
 	
 	public int getWorkersDBSize(){

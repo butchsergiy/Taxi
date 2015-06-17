@@ -37,11 +37,12 @@ public class Manager extends Worker implements WorkersDBInterface{
 		}
 	
 	
-/////////////////////////////////////////////////////////////////////////
-// when this program will be done this method would call webpage where manager will 
-// enter all data about new worker and press button Add and it will call (workersDB0.workerAdd(Worker w))
-//
-// But now I just simulate that process.
+/*
+ * when this program will be done this method would call webpage where manager will 
+ * enter all data about new worker and press button Add and it will call (workersDB0.workerAdd(Worker w))
+
+ * But now I just simulate that process.
+ */
 	public Worker workerCreateTemp(){
 		Worker w=new Worker();
 		w.setId((int)(Math.random() * 100000000));

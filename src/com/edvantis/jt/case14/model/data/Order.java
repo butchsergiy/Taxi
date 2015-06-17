@@ -1,5 +1,6 @@
 package com.edvantis.jt.case14.model.data;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 
@@ -8,7 +9,7 @@ public class Order {
 // all fields of object of class Order:
 	
 	private int orderID;
-	private LocalDateTime dateAndTime;
+	private Timestamp dateAndTime;
 	private String addr1, addr2, addr34;
 	private float distance;
 	private float orderCost;
@@ -29,11 +30,11 @@ public class Order {
 		this.orderID = orderNum;
 	}
 	
-	public LocalDateTime getDateAndTime() {
+	public Timestamp getDateAndTime() {
 		return dateAndTime;
 	}
 	
-	public void setDateAndTime(LocalDateTime dateAndTime) {
+	public void setDateAndTime(Timestamp dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
 	
