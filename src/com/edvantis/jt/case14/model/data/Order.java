@@ -1,10 +1,10 @@
 package com.edvantis.jt.case14.model.data;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 
-public class Order {
+
+public class Order implements java.io.Serializable{
 
 // all fields of object of class Order:
 	
@@ -20,6 +20,30 @@ public class Order {
 	private Boolean isDone;
 	
 	
+	public Order() {
+	}
+
+	public Order(int orderID) {
+		this.orderID = orderID;
+	}
+
+	public Order(int orderID, Timestamp dateAndTime, String addr1, String addr2,
+			String addr34, float distance, float orderCost,
+			String customerphone, String customerName, String carNumber,
+			String carDriver, Boolean isDone) {
+		this.orderID = orderID;
+		this.dateAndTime = dateAndTime;
+		this.addr1 = addr1;
+		this.addr2 = addr2;
+		this.addr34 = addr34;
+		this.distance = distance;
+		this.orderCost = orderCost;
+		this.customerphone = customerphone;
+		this.customerName = customerName;
+		this.carNumber = carNumber;
+		this.carDriver = carDriver;
+		this.isDone = isDone;
+	}
 	
 	
 	public int getOrderID() {

@@ -41,7 +41,11 @@ public class Taxi {
 		System.out.println("\n----------------\n---- ORDERS ----");
 		
 		// here I read all data from ordersDB table of database
-		ordersDBDAO.readAllordersDB();				
+		ordersDBDAO.readAllordersDB();
+		
+		System.out.println("------------------------------------");
+		System.out.println("We already have " + ordersDB0.getOrdersDBSize() + " orders in RAM.");
+		System.out.println("------------------------------------");
 				
 		// just for testing. I simulate process of creating of order and adding that order to ordersDB. 
 		try {ordersDB0.orderAdd(OperatorSimple.orderCreateTemp());} catch (OrderException e) {}
@@ -50,10 +54,12 @@ public class Taxi {
 
 		man1.doReportWithOrders();
 		System.out.println("------------------------------------");
-		System.out.println("We already have " + ordersDB0.getOrdersDBSize() + " orders.");
+		System.out.println("We already have " + ordersDB0.getOrdersDBSize() + " orders in RAM.");
 		System.out.println("------------------------------------");
 		
 
+		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
+		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
 		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
 	
 		

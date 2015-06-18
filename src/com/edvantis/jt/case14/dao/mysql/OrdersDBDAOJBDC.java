@@ -5,6 +5,7 @@ import java.sql.*;
 import com.edvantis.jt.case14.dao.OrdersDdDAOabstract;
 import com.edvantis.jt.case14.model.data.Order;
 import com.edvantis.jt.case14.model.data.OrdersDB;
+import com.edvantis.jt.case14.validator.OrderValidator;
 
 public class OrdersDBDAOJBDC extends OrdersDdDAOabstract {
 
@@ -33,6 +34,7 @@ public class OrdersDBDAOJBDC extends OrdersDdDAOabstract {
 	@Override
 	public void readAllordersDB() {
 		Order order;
+		int n=0;
 		try {
 			// STEP 2: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
@@ -65,6 +67,7 @@ public class OrdersDBDAOJBDC extends OrdersDdDAOabstract {
 				order.setCarDriver(rs.getString("carDriver"));
 				order.setIsDone(((rs.getInt("isDone")) != 0));
 				orderDB.orderAdd(order);
+				n++;
 			}
 
 			// STEP 6: Clean-up environment
@@ -85,15 +88,17 @@ public class OrdersDBDAOJBDC extends OrdersDdDAOabstract {
 				if (conn != null) conn.close();} 
 			catch (SQLException se)	{se.printStackTrace();}
 		}
-		System.out.println("Read operation from DB done.");
+		System.out.println("Read operation from DB done. Readed " +n+ " Orders.");
 	}
 	
 	
 	@Override
 	public void addToOrdersDB(Order o) {
+		
 		try {
 			// create a mysql database connection
-
+			OrderValidator.orderDataIsValid(o);
+			
 			Class.forName(JDBC_DRIVER);
 			Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
