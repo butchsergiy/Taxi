@@ -1,57 +1,39 @@
 package com.edvantis.jt.case14.dao.hibernate;
 
-// Generated Jun 18, 2015 7:45:07 PM by Hibernate Tools 4.3.1
-
 import java.util.List;
-
 import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
-
 import com.edvantis.jt.case14.dao.OrdersDdDAOabstract;
 import com.edvantis.jt.case14.model.data.Order;
 
-/**
- * Home object for domain model class Order.
- * @see com.edvantis.jt.case14.model.data.Order
- * @author Hibernate Tools
- */
 
 public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
 
-	/*
-	 * to do
-	 *  -1 singleton
-	 *  -2 
-	 */
-	
 	private static final OrdersDBDAOHibernate2 singleton = new OrdersDBDAOHibernate2(); 	// singleton
 	private OrdersDBDAOHibernate2(){}
-	public static OrdersDBDAOHibernate2 getReference(){
+	
+	public static  OrdersDBDAOHibernate2 getReference(){
 		return singleton;
 	}
 	
 	
 	
 	
-	
-	
-	
 	private static final Log log = LogFactory.getLog(OrdersDBDAOHibernate2.class);
+//	private static final Log log = LogFactory.getLog(OrdersDBDAOHibernate2.getReference().getClass());
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			return (SessionFactory) new InitialContext().lookup("SessionFactory");
+			return (SessionFactory) new InitialContext().lookup("SessionFactory");           // ?????????????? returned null
 		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
+			log.error("Could not locate SessionFactory in JNDI xXxXxXx", e);
+			throw new IllegalStateException("Could not locate SessionFactory in JNDI");
 		}
 	}
 
@@ -130,14 +112,11 @@ public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
 	}
 
 	
-	public List findByExample(Order instance) {
+	public List<Order> findByExample(Order instance) {
 		log.debug("finding Order instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("com.edvantis.jt.case14.model.data.Order")
-					.add(Example.create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			List<Order> results = sessionFactory.getCurrentSession().createCriteria("com.edvantis.jt.case14.model.data.Order").add(Example.create(instance)).list();
+			log.debug("find by example successful, result size: "+ results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
@@ -163,6 +142,11 @@ public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
 	}
 	@Override
 	public void delOrder(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void updateOrder(Order order) {
 		// TODO Auto-generated method stub
 		
 	}

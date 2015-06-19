@@ -8,6 +8,10 @@ public class Order implements java.io.Serializable{
 
 // all fields of object of class Order:
 	
+	
+	private static final long serialVersionUID = 3714126590731329262L;
+	
+
 	private int orderID;
 	private Timestamp dateAndTime;
 	private String addr1, addr2, addr34;

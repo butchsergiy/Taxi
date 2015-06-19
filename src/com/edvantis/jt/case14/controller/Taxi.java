@@ -12,15 +12,10 @@ public class Taxi {
 
 	public static void main(String[] args) {
 		
-		final String ORM_TYPE 	=	"JDBC";
-		final String DB_TYPE 	=	"MySQL";
-		OrdersDdDAOabstract ordersDBDAO = OrdersDbDAOFactory.getOrdersDbDAO(ORM_TYPE, DB_TYPE);
-		
 		OrdersDB ordersDB0 = OrdersDB.getReference();
 		WorkersDB workersDB0 = WorkersDB.getReference();
 		
 		
-
 /*
  * SIMULATION bussines logic with WORKERS
  */
@@ -37,11 +32,20 @@ public class Taxi {
 /*
  * SIMULATION bussines logic with ORDERS 
  */
-		
 		System.out.println("\n----------------\n---- ORDERS ----");
-		
+				
+		final String ORM_TYPE 	=	"hibernate";			// choose  JDBC or hibernate 
+		final String DB_TYPE 	=	"MySQL";
+		OrdersDdDAOabstract ordersDBDAO = OrdersDbDAOFactory.getOrdersDbDAO(ORM_TYPE, DB_TYPE);
+				
 		// here I read all data from ordersDB table of database
 		ordersDBDAO.readAllordersDB();
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} 
 		
 		System.out.println("------------------------------------");
 		System.out.println("We already have " + ordersDB0.getOrdersDBSize() + " orders in RAM.");

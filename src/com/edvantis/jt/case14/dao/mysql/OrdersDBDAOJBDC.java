@@ -144,6 +144,12 @@ public class OrdersDBDAOJBDC extends OrdersDdDAOabstract {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void updateOrder(Order order) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

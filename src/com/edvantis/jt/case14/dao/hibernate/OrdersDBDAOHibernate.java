@@ -15,8 +15,7 @@ import com.edvantis.jt.case14.dao.OrdersDdDAOabstract;
 import com.edvantis.jt.case14.exceptions.OrderException;
 import com.edvantis.jt.case14.model.data.Order;
 import com.edvantis.jt.case14.model.data.OrdersDB;
-import com.edvantis.jt.case14.model.workers.OperatorSimple;
-import com.edvantis.jt.case14.validator.OrderValidator;
+
 
 public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 	
@@ -77,7 +76,7 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 
 	
 	
-	   /* Method to  READ all orders from DB MySQL */
+	   /* Method to  READ all orders from DB MySQL *///////////////////////////////////////xxxxxxxxxxxxxxxxxxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	@Override
 	public void readAllordersDB() {
 	      Session session = sf.openSession();
@@ -86,18 +85,19 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 	      
 	      try{
 	         tx = session.beginTransaction();
-	         List list = session.createQuery("FROM ordersdb").list(); 
+	         List list = session.createQuery("FROM ordersdb").list();    //////////////?????????????   org.hibernate.hql.internal.ast.QuerySyntaxException: ordersdb is not mapped [FROM ordersdb]
 	         
 	        
 	         for (Iterator iterator = list.iterator(); iterator.hasNext();){
 	            Order o = (Order) iterator.next(); 
-	            
-	            System.out.print("First Name: " + o.getOrderID()); 
-	            System.out.print("  Last Name: " + o.get); 
-	            System.out.println("  Salary: " + o.getSalary); 
+	            orderDB.orderAdd(o);
+	            System.out.println("Order # " + o.getOrderID()); 
+	            System.out.println("Order time: " + o.getDateAndTime()); 
+	            System.out.println("Order Addres" + o.getAddr1()); 
+	            System.out.println("Order Addres" + o.getAddr2());
 	         }
 	         tx.commit();
-	      }catch (HibernateException e) {
+	      }catch (HibernateException | OrderException e) {
 	         if (tx!=null) tx.rollback();
 	         e.printStackTrace(); 
 	      }finally {
@@ -109,15 +109,14 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 	   
 	   /* Method to UPDATE order */
 	   @Override
-		public void updateOrder(int id) {
+//		public void updateOrder(int id) {
+		public void updateOrder(Order order) {
 	      Session session = sf.openSession();
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction();
-	         Employee employee = 
-	                    (Employee)session.get(Employee.class, EmployeeID); 
-	         employee.setSalary( salary );
-			 session.update(employee); 
+	         Order or =(Order)session.get(Order.class, order.getOrderID());   /////xxxxxxxxxxxxxxxxxxxxxxxxxxx
+	         session.update(or); 
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -127,6 +126,12 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 	      }
 	   }
 	   
+	   
+	   	@Override
+	public void updateOrder(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 	   
 	   
 	   /* Method to DELETE an order from the records */
@@ -136,9 +141,8 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction();
-	         Employee employee = 
-	                   (Employee)session.get(Employee.class, EmployeeID); 
-	         session.delete(employee); 
+	         Order order = (Order)session.get(Order.class, id); 
+	         session.delete(order); 
 	         tx.commit();
 	      }catch (HibernateException e) {
 	         if (tx!=null) tx.rollback();
@@ -147,6 +151,10 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 	         session.close(); 
 	      }
 	   }
+	   
+	   
+
+
 
 
 
