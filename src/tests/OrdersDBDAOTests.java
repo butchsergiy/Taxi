@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.edvantis.jt.case14.dao.OrdersDdDAOabstract;
-import com.edvantis.jt.case14.dao.factory.OrdersDbDAOFactory;
+import com.edvantis.jt.case14.dao.OrderDAOabstract;
+import com.edvantis.jt.case14.dao.factory.OrderDAOFactory;
 import com.edvantis.jt.case14.exceptions.OrderException;
 import com.edvantis.jt.case14.model.data.Order;
 import com.edvantis.jt.case14.model.data.OrdersDB;
@@ -37,7 +37,7 @@ public class OrdersDBDAOTests {
 	public void speedTestAddOrderToMySQLDB() throws OrderException {
 		final String ORM_TYPE = "JDBC";
 		final String DB_TYPE = "MySQL";
-		OrdersDdDAOabstract ordersDBDAO = OrdersDbDAOFactory.getOrdersDbDAO(
+		OrderDAOabstract ordersDBDAO = OrderDAOFactory.getOrdersDbDAO(
 				ORM_TYPE, DB_TYPE);
 
 		

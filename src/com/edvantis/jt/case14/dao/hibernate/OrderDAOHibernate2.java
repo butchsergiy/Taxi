@@ -15,21 +15,21 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 import org.hibernate.service.ServiceRegistry;
 
-import com.edvantis.jt.case14.dao.OrdersDdDAOabstract;
+import com.edvantis.jt.case14.dao.OrderDAOabstract;
 import com.edvantis.jt.case14.model.data.Order;
 
 
-public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
+public class OrderDAOHibernate2 extends OrderDAOabstract {
 
-	private static   OrdersDBDAOHibernate2 singleton;
+	private static   OrderDAOHibernate2 singleton;
 	
-	private OrdersDBDAOHibernate2(){
+	private OrderDAOHibernate2(){
 		
 	}
 	
-	public static synchronized OrdersDBDAOHibernate2 getReference(){
+	public static synchronized OrderDAOHibernate2 getReference(){
 		if (singleton == null) {
-			singleton = new OrdersDBDAOHibernate2();
+			singleton = new OrderDAOHibernate2();
         }
  		return singleton;
 	}
@@ -38,14 +38,13 @@ public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
 	
 	
 	
-	private static final Log log = LogFactory.getLog(OrdersDBDAOHibernate2.class);
+	private static final Log log = LogFactory.getLog(OrderDAOHibernate2.class);
 
 
 	
 	
-//	 sessionFactory = new Configuration().configure(new File("hibernate.cfg.xml")).buildSessionFactory();
-//	 
-//	 Session session = HibernateUtil.getSessionFactory().openSession();
+//		SessionFactory sessionFactory = new Configuration().configure(new File("hibernate.cfg.xml")).buildSessionFactory();
+//		Session session = HibernateUtil.getSessionFactory().openSession();
 //	    Transaction transaction = null;
 //	    try{
 //	        transaction = session.beginTransaction();
@@ -118,7 +117,7 @@ public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
 	      {
 	         if (sessionFactory == null)
 	         {
-	            Configuration configuration = new Configuration().configure(OrdersDBDAOHibernate2.class.getResource("hibernate.cfg.xml"));
+	            Configuration configuration = new Configuration().configure(OrderDAOHibernate2.class.getResource("hibernate.cfg.xml"));
 	            StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
 	            serviceRegistryBuilder.applySettings(configuration.getProperties());
 	            ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
@@ -143,12 +142,12 @@ public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
 	   }
 
 	
-	
-	
-	
-	
-	
-	
+//	   Session session = HibernateUtil.getSessionFactory().openSession();
+//	   Session session = sessionFactory.getCurrentSession();
+	   Session session = sessionFactory.openSession();
+	 
+	   Transaction transaction = null;
+
 	
 	
 	
@@ -210,8 +209,7 @@ public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
 	public Order merge(Order detachedInstance) {
 		log.debug("merging Order instance");
 		try {
-			Order result = (Order) sessionFactory.getCurrentSession().merge(
-					detachedInstance);
+			Order result = (Order) sessionFactory.getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -223,8 +221,7 @@ public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
 	public Order findById(int id) {
 		log.debug("getting Order instance with id: " + id);
 		try {
-			Order instance = (Order) sessionFactory.getCurrentSession().get(
-					"com.edvantis.jt.case14.model.data.Order", id);
+			Order instance = (Order) sessionFactory.getCurrentSession().get("com.edvantis.jt.case14.model.data.Order", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -258,9 +255,31 @@ public class OrdersDBDAOHibernate2 extends OrdersDdDAOabstract {
 	}
 	@Override
 	public void addToOrdersDB(Order o) {
-		// TODO Auto-generated method stub
+		log.debug("attaching dirty Order instance");
 		
-	}
+	    
+	        transaction = session.beginTransaction();
+//	        session.save(o);
+//	        transaction.commit();
+//	        System.out.println("Data is Saved");
+	    
+	  
+		
+		try {
+			sessionFactory.getCurrentSession().saveOrUpdate(o);
+			log.debug("attach successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			throw re;
+		}
+		  finally{
+	        session.close();
+	    }
+	    }
+		
+
+		
+	
 	@Override
 	public void updateOrder(int id) {
 		// TODO Auto-generated method stub

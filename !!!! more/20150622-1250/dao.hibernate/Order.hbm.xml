@@ -3,13 +3,11 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Jun 19, 2015 7:52:46 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.edvantis.jt.case14.model.data.Order" table="ordersdb" catalog="taxiservice" optimistic-lock="version">
-        <id name="id" type="java.lang.Integer">
+    <class name="com.edvantis.jt.case14.model.data.Order" table="ORDER" optimistic-lock="version">
+        <id name="id" type="int">
             <column name="ID" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
-		
-		
         <property name="dateAndTime" type="java.sql.Timestamp">
             <column name="DATEANDTIME" />
         </property>

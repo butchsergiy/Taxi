@@ -4,7 +4,7 @@ import com.edvantis.jt.case14.model.data.Order;
 
 
 
-public abstract class OrdersDdDAOabstract {
+public abstract class OrderDAOabstract {
 
 	public abstract void addToOrdersDB(Order o);
 	public abstract void readAllordersDB();

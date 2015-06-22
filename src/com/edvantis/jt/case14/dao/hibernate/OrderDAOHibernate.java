@@ -11,13 +11,13 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.edvantis.jt.case14.dao.OrdersDdDAOabstract;
+import com.edvantis.jt.case14.dao.OrderDAOabstract;
 import com.edvantis.jt.case14.exceptions.OrderException;
 import com.edvantis.jt.case14.model.data.Order;
 import com.edvantis.jt.case14.model.data.OrdersDB;
 
 
-public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
+public class OrderDAOHibernate extends OrderDAOabstract {
 		
 //	Session s = sf.openSession();
 //	Transaction tx = s.beginTransaction();
@@ -33,14 +33,14 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 //	sf.close();
 	
 	// Private constructor for Singleton
-	private OrdersDBDAOHibernate(){
+	private OrderDAOHibernate(){
 		}		
 	
-	public static OrdersDBDAOHibernate getReference(){
+	public static OrderDAOHibernate getReference(){
 		return singleton;
 	}
 	
-	private static final OrdersDBDAOHibernate singleton = new OrdersDBDAOHibernate();   		// Singleton
+	private static final OrderDAOHibernate singleton = new OrderDAOHibernate();   		// Singleton
 	
 	Configuration cfg = new Configuration();
 	

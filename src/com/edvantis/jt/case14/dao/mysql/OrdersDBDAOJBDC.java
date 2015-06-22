@@ -2,12 +2,12 @@ package com.edvantis.jt.case14.dao.mysql;
 
 import java.sql.*;
 
-import com.edvantis.jt.case14.dao.OrdersDdDAOabstract;
+import com.edvantis.jt.case14.dao.OrderDAOabstract;
 import com.edvantis.jt.case14.model.data.Order;
 import com.edvantis.jt.case14.model.data.OrdersDB;
 import com.edvantis.jt.case14.validator.OrderValidator;
 
-public class OrdersDBDAOJBDC extends OrdersDdDAOabstract {
+public class OrdersDBDAOJBDC extends OrderDAOabstract {
 
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
