@@ -12,12 +12,12 @@ public class Order implements java.io.Serializable{
 	private static final long serialVersionUID = 3714126590731329262L;
 	
 
-	private int id;
+	private int orderID;
 	private Timestamp dateAndTime;
 	private String addr1, addr2, addr34;
 	private float distance;
 	private float orderCost;
-	private String customerPhone;
+	private String customerphone;
 	private String customerName;
 	private String carNumber;
 	private String carDriver;
@@ -28,21 +28,21 @@ public class Order implements java.io.Serializable{
 	}
 
 	public Order(int orderID) {
-		this.id = orderID;
+		this.orderID = orderID;
 	}
 
 	public Order(int orderID, Timestamp dateAndTime, String addr1, String addr2,
 			String addr34, float distance, float orderCost,
-			String customerPhone, String customerName, String carNumber,
+			String customerphone, String customerName, String carNumber,
 			String carDriver, Boolean isDone) {
-		this.id = orderID;
+		this.orderID = orderID;
 		this.dateAndTime = dateAndTime;
 		this.addr1 = addr1;
 		this.addr2 = addr2;
 		this.addr34 = addr34;
 		this.distance = distance;
 		this.orderCost = orderCost;
-		this.customerPhone = customerPhone;
+		this.customerphone = customerphone;
 		this.customerName = customerName;
 		this.carNumber = carNumber;
 		this.carDriver = carDriver;
@@ -50,12 +50,12 @@ public class Order implements java.io.Serializable{
 	}
 	
 	
-	public int getId() {
-		return id;
+	public int getOrderID() {
+		return orderID;
 	}
 	
-	public void setId(int orderNum) {
-		this.id = orderNum;
+	public void setOrderID(int orderNum) {
+		this.orderID = orderNum;
 	}
 	
 	public Timestamp getDateAndTime() {
@@ -106,12 +106,12 @@ public class Order implements java.io.Serializable{
 		this.orderCost = orderCost;
 	}
 	
-	public String getCustomerPhone() {
-		return customerPhone;
+	public String getCustomerphone() {
+		return customerphone;
 	}
 	
-	public void setCustomerPhone(String customerPhone) {
-		this.customerPhone = customerPhone;
+	public void setCustomerphone(String customerphone) {
+		this.customerphone = customerphone;
 	}
 	
 	public String getCustomerName() {

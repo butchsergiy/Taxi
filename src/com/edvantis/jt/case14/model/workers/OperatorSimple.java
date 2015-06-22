@@ -17,12 +17,12 @@ public class OperatorSimple extends OperatorAbstract {
 		// data generator
 
 		o.setDateAndTime(Timestamp.valueOf(LocalDateTime.now()));
-		o.setOrderID((int)(Math.random() * 1000));
+		o.setId((int)(Math.random() * 1000));
 		o.setAddr1("From: Volodymyra " + ((int) (Math.random() * 200)));
 		o.setAddr2("To: Chernivetska " + ((int) (Math.random() * 200)));
 		o.setDistance((int) (Math.random() * 1000));
 		o.setOrderCost((int) (Math.random() * 1000));
-		o.setCustomerphone(Integer.toString((int) (Math.random() * 10000000)));
+		o.setCustomerPhone(Integer.toString((int) (Math.random() * 10000000)));
 		o.setCarNumber("BC"+Integer.toString((int) (Math.random() * 100000))+"AA");
 		o.setCarDriver("Vasil_" + ((int) (Math.random() * 100)));
 		o.setIsDone(true);

@@ -4,7 +4,7 @@
 <!-- Generated Jun 19, 2015 7:52:46 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.edvantis.jt.case14.model.data.Order" table="ORDER" optimistic-lock="version">
-        <id name="id" type="int">
+        <id name="orderID" type="int">
             <column name="ID" />
             <generator class="assigned" />
         </id>
@@ -26,7 +26,7 @@
         <property name="orderCost" type="float">
             <column name="ORDERCOST" />
         </property>
-        <property name="customerPhone" type="java.lang.String">
+        <property name="customerphone" type="java.lang.String">
             <column name="CUSTOMERPHONE" />
         </property>
         <property name="customerName" type="java.lang.String">

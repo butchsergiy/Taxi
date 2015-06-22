@@ -34,21 +34,16 @@ public class Taxi {
  */
 		System.out.println("\n----------------\n---- ORDERS ----");
 				
-		final String ORM_TYPE 	=	"hibernate";			// choose  JDBC or hibernate 
+		final String ORM_TYPE 	=	"hibernate2";			// choose  JDBC or hibernate 
 		final String DB_TYPE 	=	"MySQL";
 		OrdersDdDAOabstract ordersDBDAO = OrdersDbDAOFactory.getOrdersDbDAO(ORM_TYPE, DB_TYPE);
 				
 		// here I read all data from ordersDB table of database
 		ordersDBDAO.readAllordersDB();
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} 
+		
 		
 		System.out.println("------------------------------------");
-		System.out.println("We already have " + ordersDB0.getOrdersDBSize() + " orders in RAM.");
+		System.out.println("1. We already have " + ordersDB0.getOrdersDBSize() + " orders in RAM.");
 		System.out.println("------------------------------------");
 				
 		// just for testing. I simulate process of creating of order and adding that order to ordersDB. 
@@ -58,13 +53,14 @@ public class Taxi {
 
 		man1.doReportWithOrders();
 		System.out.println("------------------------------------");
-		System.out.println("We already have " + ordersDB0.getOrdersDBSize() + " orders in RAM.");
+		System.out.println("2. We already have " + ordersDB0.getOrdersDBSize() + " orders in RAM.");
 		System.out.println("------------------------------------");
 		
 
 		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
 		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
 		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
+		
 	
 		
 		

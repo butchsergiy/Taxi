@@ -39,13 +39,13 @@ public class OrdersDB implements OrdersDBInterface{
 		OrderValidator.orderDataIsValid(order);
 		orders.add(order);
 
-		orders.get(orders.indexOf(order)).setOrderID(orders.indexOf(order));			// orderNumber = indexOf that object
+		orders.get(orders.indexOf(order)).setId(orders.indexOf(order));			// orderNumber = indexOf that object
 		// here need to add command to save new order to DB 
 	}
 
 	public void orderDel(int id) {
 		for(Order o: orders){
-			if (o.getOrderID()==id) orders.remove(o);
+			if (o.getId()==id) orders.remove(o);
 		}
 				
 	}
@@ -54,7 +54,7 @@ public class OrdersDB implements OrdersDBInterface{
 	@Override
 	public Order orderGet(int id) {
 		for(Order o: orders){
-			if(o.getOrderID()==id) return o;
+			if(o.getId()==id) return o;
 		}
 		return null;	
 	}
@@ -69,13 +69,13 @@ public class OrdersDB implements OrdersDBInterface{
 	public void printAll(){
 		for(int i=0; i<orders.size(); i++){
 			System.out.println();
-			System.out.println("Order ID= "+orders.get(i).getOrderID());
+			System.out.println("Order ID= "+orders.get(i).getId());
 			System.out.println(orders.get(i).getDateAndTime());
 			System.out.println(orders.get(i).getAddr1());
 			System.out.println(orders.get(i).getAddr2());
 			System.out.println(" km:\t"+orders.get(i).getDistance());
 			System.out.println(" grn: \t"+orders.get(i).getOrderCost());
-			System.out.println(" (phone) \t"+orders.get(i).getCustomerphone());
+			System.out.println(" (phone) \t"+orders.get(i).getCustomerPhone());
 			System.out.println(" car driver: \t"+orders.get(i).getCarDriver()); 
 			System.out.println(" car number: \t"+orders.get(i).getCarNumber());
 			System.out.println(" is done: \t"+orders.get(i).getIsDone());

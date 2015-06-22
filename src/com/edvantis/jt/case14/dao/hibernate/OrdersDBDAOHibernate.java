@@ -18,15 +18,7 @@ import com.edvantis.jt.case14.model.data.OrdersDB;
 
 
 public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
-	
-	Configuration cfg = new Configuration();
-	{cfg.configure("com/edvantis/jt/case14/dao/hibernate/hibernate.cfg.xml");}
-	
-	
-	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
-	SessionFactory sf = cfg.buildSessionFactory(serviceRegistry);
-	
-	
+		
 //	Session s = sf.openSession();
 //	Transaction tx = s.beginTransaction();
 //	
@@ -40,13 +32,23 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 //	s.clear();
 //	sf.close();
 	
-	
-	private static final OrdersDBDAOHibernate singleton = new OrdersDBDAOHibernate();   		// Singleton
-	private OrdersDBDAOHibernate(){}		// Private constructor for Singleton
+	// Private constructor for Singleton
+	private OrdersDBDAOHibernate(){
+		}		
 	
 	public static OrdersDBDAOHibernate getReference(){
 		return singleton;
 	}
+	
+	private static final OrdersDBDAOHibernate singleton = new OrdersDBDAOHibernate();   		// Singleton
+	
+	Configuration cfg = new Configuration();
+	
+	{cfg.configure();}  //"hibernate2.cfg.xml"
+	
+	
+	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
+	SessionFactory sf = cfg.buildSessionFactory(serviceRegistry);
 	
 	
 	
@@ -85,13 +87,13 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 	      
 	      try{
 	         tx = session.beginTransaction();
-	         List list = session.createQuery("FROM ordersdb").list();    //////////////?????????????   org.hibernate.hql.internal.ast.QuerySyntaxException: ordersdb is not mapped [FROM ordersdb]
+	         List<Order> list = session.createQuery("FROM ordersdb").list();    //////////////?????????????   org.hibernate.hql.internal.ast.QuerySyntaxException: ordersdb is not mapped [FROM ordersdb]
 	         
 	        
 	         for (Iterator iterator = list.iterator(); iterator.hasNext();){
 	            Order o = (Order) iterator.next(); 
 	            orderDB.orderAdd(o);
-	            System.out.println("Order # " + o.getOrderID()); 
+	            System.out.println("Order # " + o.getId()); 
 	            System.out.println("Order time: " + o.getDateAndTime()); 
 	            System.out.println("Order Addres" + o.getAddr1()); 
 	            System.out.println("Order Addres" + o.getAddr2());
@@ -115,7 +117,7 @@ public class OrdersDBDAOHibernate extends OrdersDdDAOabstract {
 	      Transaction tx = null;
 	      try{
 	         tx = session.beginTransaction();
-	         Order or =(Order)session.get(Order.class, order.getOrderID());   /////xxxxxxxxxxxxxxxxxxxxxxxxxxx
+	         Order or =(Order)session.get(Order.class, order.getId());   /////xxxxxxxxxxxxxxxxxxxxxxxxxxx
 	         session.update(or); 
 	         tx.commit();
 	      }catch (HibernateException e) {

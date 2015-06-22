@@ -54,14 +54,14 @@ public class OrdersDBDAOJBDC extends OrdersDdDAOabstract {
 			// STEP 5: Extract data from result set
 			while (rs.next()) {
 				order = new Order();
-				order.setOrderID(rs.getInt("id"));
+				order.setId(rs.getInt("id"));
 				order.setDateAndTime(rs.getTimestamp("dateAndTime")); 
 				order.setAddr1(rs.getString("addr1"));
 				order.setAddr2(rs.getString("addr2"));
 				order.setAddr34(rs.getString("addr34"));
 				order.setDistance(rs.getFloat("distance"));
 				order.setOrderCost(rs.getFloat("orderCost"));
-				order.setCustomerphone(rs.getString("customerPhone"));
+				order.setCustomerPhone(rs.getString("customerPhone"));
 				order.setCustomerName(rs.getString("customerName"));
 				order.setCarNumber(rs.getString("carNumber"));
 				order.setCarDriver(rs.getString("carDriver"));
@@ -109,14 +109,14 @@ public class OrdersDBDAOJBDC extends OrdersDdDAOabstract {
 
 			// create the mysql insert preparedstatement
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
-			preparedStmt.setInt(1, o.getOrderID());
+			preparedStmt.setInt(1, o.getId());
 			preparedStmt.setTimestamp(2, o.getDateAndTime());
 			preparedStmt.setString(3, o.getAddr1());
 			preparedStmt.setString(4, o.getAddr2());
 			preparedStmt.setString(5, o.getAddr34());
 			preparedStmt.setFloat(6, o.getDistance());
 			preparedStmt.setFloat(7, o.getOrderCost());
-			preparedStmt.setString(8, o.getCustomerphone());
+			preparedStmt.setString(8, o.getCustomerPhone());
 			preparedStmt.setString(9, o.getCustomerName());
 			preparedStmt.setString(10, o.getCarNumber());
 			preparedStmt.setString(11, o.getCarDriver());
