@@ -8,8 +8,9 @@ import com.edvantis.jt.case14.model.data.Order;
 
 public class OperatorSimple extends OperatorAbstract {
 
+	private static final long serialVersionUID = 6453675309100331512L;
 
-// temporary method that simulares how operator creates new TaxiOrder
+	// temporary method that simulares how operator creates new TaxiOrder
 	public static Order orderCreateTemp() {
 
 		Order o = new Order();

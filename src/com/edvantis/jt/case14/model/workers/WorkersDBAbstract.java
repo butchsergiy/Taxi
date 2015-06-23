@@ -11,7 +11,7 @@ public abstract class WorkersDBAbstract implements WorkersDBInterface {
 
 	public abstract void workersPrint();
 
-	public abstract void workerDel(long id);
+	public abstract void workerDel(int id);
 	
 
 

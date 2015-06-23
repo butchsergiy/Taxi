@@ -5,6 +5,8 @@ import com.edvantis.jt.case14.model.data.OrdersDB;
 
 public class Driver extends Worker{
 
+	private static final long serialVersionUID = 8786415050168205592L;
+
 	/**
 	 * Driver can see his orders
 	 */

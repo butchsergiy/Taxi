@@ -34,7 +34,7 @@ public class WorkersDB extends WorkersDBAbstract{
 	
 
 	@Override
-	public void workerDel(long id) {
+	public void workerDel(int id) {
 		for(Worker w: workers){
 			if(w.getId()==id) workers.remove(w);
 		}
@@ -65,9 +65,6 @@ public class WorkersDB extends WorkersDBAbstract{
 	
 	}
 
-		
-	
-	
 }
 
 

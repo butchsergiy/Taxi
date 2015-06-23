@@ -1,8 +1,5 @@
 package com.edvantis.jt.case14.dao.hibernate;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,10 +9,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import com.edvantis.jt.case14.dao.OrderDAOabstract;
-import com.edvantis.jt.case14.exceptions.OrderException;
 import com.edvantis.jt.case14.model.data.Order;
-import com.edvantis.jt.case14.model.data.OrdersDB;
-
 
 public class OrderDAOHibernate3 extends OrderDAOabstract {
 		

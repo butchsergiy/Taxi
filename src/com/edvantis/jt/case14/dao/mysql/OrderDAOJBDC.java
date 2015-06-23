@@ -7,7 +7,7 @@ import com.edvantis.jt.case14.model.data.Order;
 import com.edvantis.jt.case14.model.data.OrdersDB;
 import com.edvantis.jt.case14.validator.OrderValidator;
 
-public class OrdersDBDAOJBDC extends OrderDAOabstract {
+public class OrderDAOJBDC extends OrderDAOabstract {
 
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -16,13 +16,14 @@ public class OrdersDBDAOJBDC extends OrderDAOabstract {
 	// Database credentials
 	static final String USER = "root";
 	static final String PASS = "root";
-	
-	private static final OrdersDBDAOJBDC singleton =new OrdersDBDAOJBDC();    // Singleton
-	
-	private OrdersDBDAOJBDC() {
+
+	private static final OrderDAOJBDC singleton = new OrderDAOJBDC(); // Singleton
+
+	private OrderDAOJBDC() {
+
 	}
-	
-	public static OrdersDBDAOJBDC getReference(){
+
+	public static OrderDAOJBDC getReference() {
 		return singleton;
 	}
 
@@ -30,14 +31,21 @@ public class OrdersDBDAOJBDC extends OrderDAOabstract {
 	Statement stmt = null;
 	OrdersDB orderDB = OrdersDB.getReference();
 
-	
+	{
+		try {
+			Class.forName(JDBC_DRIVER);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void readAllordersDB() {
 		Order order;
-		int n=0;
+		int n = 0;
 		try {
 			// STEP 2: Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver");
+			// Class.forName("JDBC_DRIVER");
 
 			// STEP 3: Open a connection
 			System.out.println("Connecting to database...");
@@ -55,7 +63,7 @@ public class OrdersDBDAOJBDC extends OrderDAOabstract {
 			while (rs.next()) {
 				order = new Order();
 				order.setId(rs.getInt("id"));
-				order.setDateAndTime(rs.getTimestamp("dateAndTime")); 
+				order.setDateAndTime(rs.getTimestamp("dateAndTime"));
 				order.setAddr1(rs.getString("addr1"));
 				order.setAddr2(rs.getString("addr2"));
 				order.setAddr34(rs.getString("addr34"));
@@ -80,26 +88,31 @@ public class OrdersDBDAOJBDC extends OrderDAOabstract {
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();
-		} finally {												// finally block used to close resources
+		} finally { // finally block used to close resources
 			try {
-				if (stmt != null) stmt.close();} 
-			catch (SQLException se2){}							// nothing we can do
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			} // nothing we can do
 			try {
-				if (conn != null) conn.close();} 
-			catch (SQLException se)	{se.printStackTrace();}
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
 		}
-		System.out.println("Read operation from DB done. Readed " +n+ " Orders.");
+		System.out.println("Read operation from DB done. Readed " + n
+				+ " Orders.");
 	}
-	
-	
+
 	@Override
 	public void addToOrdersDB(Order o) {
-		
+
 		try {
 			// create a mysql database connection
 			OrderValidator.orderDataIsValid(o);
-			
-			Class.forName(JDBC_DRIVER);
+
+			// Class.forName(JDBC_DRIVER);
 			Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
 			// the mysql insert statement
@@ -131,48 +144,40 @@ public class OrdersDBDAOJBDC extends OrderDAOabstract {
 
 	}
 
-	
-
 	@Override
 	public void updateOrder(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delOrder(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateOrder(Order order) {
 		// TODO Auto-generated method stub
-		
-	}
-	
-	
 
+	}
 
 }
 // MySQL ordersDB table:
 // CREATE TABLE `taxiservice`.`ordersdb` (
-//1 `id` 			INT NOT NULL, AUTO_INCREMENT
-//2 `dateAndTime` 	DATETIME NULL,
-//3 `addr1` 		VARCHAR(45) NULL,
-//4 `addr2` 		VARCHAR(45) NULL,
-//5 `addr34` 		VARCHAR(45) NULL,
-//6 `distance` 		FLOAT NULL,
-//7 `orderCost` 	FLOAT NULL,
-//8 `customerPhone` VARCHAR(45) NULL,
-//9 `customerName` 	VARCHAR(45) NULL,
-//10 `carNumber` 	VARCHAR(45) NULL,
-//11 `carDriver` 	VARCHAR(45) NULL,
-//12 `isDone` 		INT NULL,
+// 1 `id` INT NOT NULL, AUTO_INCREMENT
+// 2 `dateAndTime` DATETIME NULL,
+// 3 `addr1` VARCHAR(45) NULL,
+// 4 `addr2` VARCHAR(45) NULL,
+// 5 `addr34` VARCHAR(45) NULL,
+// 6 `distance` FLOAT NULL,
+// 7 `orderCost` FLOAT NULL,
+// 8 `customerPhone` VARCHAR(45) NULL,
+// 9 `customerName` VARCHAR(45) NULL,
+// 10 `carNumber` VARCHAR(45) NULL,
+// 11 `carDriver` VARCHAR(45) NULL,
+// 12 `isDone` BIT NULL,
 // PRIMARY KEY (`id`));
-
-
-
 
 // INSERT INTO `taxiservice`.`ordersdb` (`id`, `addr1`, `addr2`, `addr34`,
 // `distance`, `orderCost`, `customerPhone`, `customerName`, `carNumber`,

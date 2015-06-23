@@ -12,7 +12,7 @@
   </interface>  
   <class id="2" language="java" name="com.edvantis.jt.case14.model.data.OrdersDB" project="Taxi" 
     file="/Taxi/src/com/edvantis/jt/case14/model/data/OrdersDB.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="277" width="202" x="285" y="63"/>    
+    <position height="277" width="202" x="278" y="114"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,8 +21,8 @@
   </class>  
   <class id="3" language="java" name="com.edvantis.jt.case14.model.data.Order" project="Taxi" 
     file="/Taxi/src/com/edvantis/jt/case14/model/data/Order.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="139" y="512"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="783" width="219" x="5" y="97"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -110,79 +110,79 @@
     </display>  
   </class>  
   <realization id="13">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <generalization id="14">    
-    <bendpoint x="1008" y="302"/>    
+    <bendpoint x="1006" y="113"/>    
     <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <association id="15">    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="14">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="16" name="s">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="15" name="s">        
+        <position height="0" width="0" x="-7" y="51"/>      
       </attribute>      
-      <multiplicity id="17" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="16" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-7" y="51"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="18">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="7"/>  
+  <association id="17">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="18" name="orders">        
+        <position height="0" width="0" x="83" y="-24"/>      
+      </attribute>      
+      <multiplicity id="19" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="83" y="-24"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="20">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="10"/>  
   </generalization>  
-  <realization id="19">    
+  <realization id="21">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="4"/>  
   </realization>  
-  <generalization id="20">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <realization id="21">    
-    <bendpoint x="1006" y="113"/>    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <generalization id="22">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <association id="23">    
+  <association id="22">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="24" name="workers">        
+      <attribute id="23" name="workers">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="25" minimum="0" maximum="2147483647">        
+      <multiplicity id="24" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
   <generalization id="26">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="10"/>  
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
   </generalization>  
   <generalization id="27">    
+    <bendpoint x="1008" y="302"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="28">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="6"/>  
   </generalization>  
-  <association id="28">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="29" name="orders">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="30" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <realization id="29">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

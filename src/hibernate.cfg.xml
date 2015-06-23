@@ -10,5 +10,6 @@
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.current_session_context_class">thread</property>
   <mapping class="com.edvantis.jt.case14.model.data.Order" resource="com/edvantis/jt/case14/dao/hibernate/Order.hbm.xml"/>
+  <mapping class="com.edvantis.jt.case14.model.workers.Worker" resource="com/edvantis/jt/case14/dao/hibernate/Worker.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

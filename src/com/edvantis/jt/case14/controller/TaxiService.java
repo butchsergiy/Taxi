@@ -1,20 +1,23 @@
 package com.edvantis.jt.case14.controller;
 
 import com.edvantis.jt.case14.dao.OrderDAOabstract;
+import com.edvantis.jt.case14.dao.WorkerDAOabstract;
 import com.edvantis.jt.case14.dao.factory.OrderDAOFactory;
-import com.edvantis.jt.case14.exceptions.OrderException;
+import com.edvantis.jt.case14.dao.factory.WorkerDAOFactory;
 import com.edvantis.jt.case14.exceptions.WorkerExceptions;
 import com.edvantis.jt.case14.model.data.*;
 import com.edvantis.jt.case14.model.workers.*;
 
 
-public class Taxi {
+public class TaxiService {
 
 	public static void main(String[] args) {
+
+		OrdersDB ordersDB0 = OrdersDB.getReference();	// instance of OrdersDB class in ram
+		WorkersDB workersDB0 = WorkersDB.getReference();// instance of WorkersDB class in ram
 		
-		OrdersDB ordersDB0 = OrdersDB.getReference();
-		WorkersDB workersDB0 = WorkersDB.getReference();
-		
+		OrderDAOabstract ordersDAO = OrderDAOFactory.getOrdersDbDAO(); 		// instance of OrderDAO class for CRUD operations with MySQL
+		WorkerDAOabstract workersDAO = WorkerDAOFactory.getOrdersDbDAO();	// instance of WorkerDAO class for CRUD operations with MySQL
 		
 /*
  * SIMULATION bussines logic with WORKERS
@@ -28,7 +31,7 @@ public class Taxi {
 		workersDB0.workersPrint();
 		System.out.println("------------------------------------");
 		
-		
+		workersDAO.readAllWorkers();
 		
 		
 		
@@ -36,15 +39,14 @@ public class Taxi {
 /*
  * SIMULATION bussines logic with ORDERS 
  */
-			System.out.println("\n----------------\n---- ORDERS ----");
-					
-			final String ORM_TYPE 	=	"hibernate";			// choose  JDBC or hibernate 
-			final String DB_TYPE 	=	"MySQL";
+		System.out.println("\n----------------\n---- ORDERS ----");
+
+
+
 		
-			OrderDAOabstract ordersDBDAO = OrderDAOFactory.getOrdersDbDAO(ORM_TYPE, DB_TYPE);
 				
 // +Here I read all data from ordersDB table of database  
-		ordersDBDAO.readAllordersDB();
+		ordersDAO.readAllordersDB();
 		
 			
 // +Finding order ib MySQL DB by ID. WORKS
@@ -75,8 +77,8 @@ public class Taxi {
 		
 		
 		
-		ordersDBDAO.closeSessionFactory();
-		
+		ordersDAO.closeSessionFactory();
+		workersDAO.closeSessionFactory();
 			
 	}
 }

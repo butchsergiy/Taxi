@@ -1,11 +1,15 @@
 package com.edvantis.jt.case14.model.workers;
 
-import java.time.LocalDate;
-
+import java.sql.Date;
+import com.edvantis.jt.case14.dao.WorkerDAOabstract;
+import com.edvantis.jt.case14.dao.factory.WorkerDAOFactory;
 import com.edvantis.jt.case14.model.data.*;
 
 
 public class Manager extends Worker implements WorkersDBInterface{
+
+	private static final long serialVersionUID = 3291918281211367444L;
+
 
 /**
  *  Manager can:
@@ -16,25 +20,20 @@ public class Manager extends Worker implements WorkersDBInterface{
 	
 // Constructor #1.	
 	public Manager(int id, String name, String pos) {
-		
 		this.setId(id);
 		this.setName(name);
 		this.setPosition(pos);
-//		
-//		System.out.println(this.getIdNumber());
-//		System.out.println(this.getName());
-		
-		}
+	}
 
 	OrdersDB 	o =	OrdersDB.getReference();
 	WorkersDB 	w =	WorkersDB.getReference();
 	
-	
+	WorkerDAOabstract workersDAO = WorkerDAOFactory.getOrdersDbDAO();
 	
 	
 	public void doReportWithOrders() {
 		o.printAll();
-		}
+	}
 	
 	
 /*
@@ -47,7 +46,7 @@ public class Manager extends Worker implements WorkersDBInterface{
 		Worker w=new Worker();
 		w.setId((int)(Math.random() * 100000000));
 		w.setName("Oleg_" + ((int) (Math.random() * 100)));
-		w.setBirthDate(LocalDate.parse("1980-01-01"));
+		w.setBirthDate(Date.valueOf("1980-01-01"));
 		w.setPosition(WorkersDB.positions[(int)(Math.random()*3)]);
 		w.setAccessLevel(1);
 		w.setPassword("");
@@ -58,8 +57,9 @@ public class Manager extends Worker implements WorkersDBInterface{
 
 	
 	
-	public void workerDel(long id) {
+	public void workerDel(int id) {
 		w.workerDel(id);
+		workersDAO.delWorker(id);
 		
 	}
 

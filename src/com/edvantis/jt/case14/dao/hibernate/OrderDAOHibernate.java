@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -120,8 +119,10 @@ public class OrderDAOHibernate extends OrderDAOabstract {
 	/*
 	 * WORKS
 	 */
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void readAllordersDB() {
+		System.out.println("*** Reading all records from DB ..."); 
 			session = sessionFactory.openSession();			
 			transaction = session.beginTransaction();
 			Order o;
@@ -130,7 +131,7 @@ public class OrderDAOHibernate extends OrderDAOabstract {
 			for (Iterator it=orderss.iterator(); it.hasNext();){
 				o=(Order)it.next();
 				ordersDB0.orderAdd(o);
-				System.out.println("Order ("+o.getId()+") date: "+o.getDateAndTime());
+				System.out.println("Order ("+o.getId()+") date: "+o.getDateAndTime()+". "+ o.getAddr1()+". "+ o.getAddr2());
 				}
 			transaction.commit();
 		} 
@@ -218,7 +219,7 @@ public class OrderDAOHibernate extends OrderDAOabstract {
 	public void attachClean(Order o) {
 		log.debug("attaching clean Order instance");
 		try {
-			sessionFactory.getCurrentSession().lock(o, LockMode.NONE);
+//			sessionFactory.getCurrentSession().lock(o, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -270,6 +271,7 @@ public class OrderDAOHibernate extends OrderDAOabstract {
 	public List<Order> findByExample(Order o) {
 		log.debug("finding Order instance by example");
 		try {
+			@SuppressWarnings("unchecked")
 			List<Order> results = sessionFactory.getCurrentSession().createCriteria("com.edvantis.jt.case14.model.data.Order").add(Example.create(o)).list();
 			log.debug("find by example successful, result size: "+ results.size());
 			return results;

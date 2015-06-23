@@ -1,27 +1,49 @@
 package com.edvantis.jt.case14.model.workers;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 
+public class Worker implements java.io.Serializable {
 
-public class Worker  {
+	public Worker(Integer id, String name, String position,
+			Date birthDate, int accessLevel, String carNumber,
+			String password, Boolean logget) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.position = position;
+		this.birthDate = birthDate;
+		this.accessLevel = accessLevel;
+		this.carNumber = carNumber;
+		this.password = password;
+		this.logget = logget;
+	}
 
-	private long 	id;
+		public Worker() {
+	}
+
+	public Worker(int id) {
+		this.id = id;
+	}
+	
+	
+	private static final long serialVersionUID = 7462052656308925727L;
+	
+	private Integer id;
 	private String 	name;
 	private String 	position;
-	private LocalDate birthDate;
-	private int 	accessLevel;
+	private Date birthDate;
+	private Integer accessLevel;
 	private String 	carNumber;
 	private String 	password;
 	private Boolean logget;
 	
+
 	
-	
-	
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -41,11 +63,11 @@ public class Worker  {
 		this.position = position;
 	}
 	
-	public LocalDate getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 	
-	public void setBirthDate(LocalDate birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 	

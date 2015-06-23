@@ -5,9 +5,6 @@ import java.sql.Timestamp;
 
 
 public class Order implements java.io.Serializable{
-
-// all fields of object of class Order:
-	
 	
 	private static final long serialVersionUID = 3714126590731329262L;
 	

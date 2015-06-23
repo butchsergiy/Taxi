@@ -1,13 +1,10 @@
 package tests;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import com.edvantis.jt.case14.dao.OrderDAOabstract;
 import com.edvantis.jt.case14.dao.factory.OrderDAOFactory;
 import com.edvantis.jt.case14.exceptions.OrderException;
@@ -35,27 +32,23 @@ public class OrdersDBDAOTests {
 
 	@Test
 	public void speedTestAddOrderToMySQLDB() throws OrderException {
-		final String ORM_TYPE = "JDBC";
-		final String DB_TYPE = "MySQL";
-		OrderDAOabstract ordersDBDAO = OrderDAOFactory.getOrdersDbDAO(
-				ORM_TYPE, DB_TYPE);
+		OrderDAOabstract ordersDBDAO = OrderDAOFactory.getOrdersDbDAO();
 
-		
-		for (int i = 0; i<100; i++){
-		Order order = OperatorSimple.orderCreateTemp();
-		ordersDBDAO.addToOrdersDB(order);
+		for (int i = 0; i < 100; i++) {
+			Order order = OperatorSimple.orderCreateTemp();
+			ordersDBDAO.addToOrdersDB(order);
 		}
 	}
-	
+
 	/*
-	 *  So working with DB in RAM is more than 10 times faster that 
-	 *  adding 10 workers to DB
+	 * So working with DB in RAM is more than 10 times faster that adding 10
+	 * workers to DB
 	 */
 	@Test
 	public void testAddOrderToRAMDB() throws OrderException {
-		for (int i = 0; i<100; i++){
-		Order order = OperatorSimple.orderCreateTemp();
-		OrdersDB.getReference().orderAdd(order);
+		for (int i = 0; i < 100; i++) {
+			Order order = OperatorSimple.orderCreateTemp();
+			OrdersDB.getReference().orderAdd(order);
 		}
 	}
 

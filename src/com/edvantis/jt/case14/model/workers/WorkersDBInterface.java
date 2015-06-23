@@ -7,7 +7,7 @@ import com.edvantis.jt.case14.exceptions.WorkerExceptions;
 public interface WorkersDBInterface {
 
 	public void workerAdd(Worker w) throws WorkerExceptions;
-	public void workerDel(long id);
+	public void workerDel(int id);
 	public void workersPrint();
 	
 }

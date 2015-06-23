@@ -7,6 +7,8 @@ import com.edvantis.jt.case14.model.data.OrdersDB;
 
 public class OperatorMain extends OperatorSimple{
 
+	private static final long serialVersionUID = 1190464896713530329L;
+	
 	OrdersDB 	o =	OrdersDB.getReference();
 	
 	public void orderDel(int id){
