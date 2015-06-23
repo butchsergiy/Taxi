@@ -29,40 +29,54 @@ public class Taxi {
 		System.out.println("------------------------------------");
 		
 		
+		
+		
+		
+		
 /*
  * SIMULATION bussines logic with ORDERS 
  */
-		System.out.println("\n----------------\n---- ORDERS ----");
+			System.out.println("\n----------------\n---- ORDERS ----");
+					
+			final String ORM_TYPE 	=	"hibernate";			// choose  JDBC or hibernate 
+			final String DB_TYPE 	=	"MySQL";
+		
+			OrderDAOabstract ordersDBDAO = OrderDAOFactory.getOrdersDbDAO(ORM_TYPE, DB_TYPE);
 				
-		final String ORM_TYPE 	=	"hibernate2";			// choose  JDBC or hibernate 
-		final String DB_TYPE 	=	"MySQL";
-		OrderDAOabstract ordersDBDAO = OrderDAOFactory.getOrdersDbDAO(ORM_TYPE, DB_TYPE);
-				
-		// here I read all data from ordersDB table of database
+// +Here I read all data from ordersDB table of database  
 		ordersDBDAO.readAllordersDB();
 		
+			
+// +Finding order ib MySQL DB by ID. WORKS
+//		try {ordersDB0.orderAdd(ordersDBDAO.findById(1005));} catch (OrderException e) {e.printStackTrace();}
+		
+		
+// +Deleting Order fromMySQL DB. WORKS
+//		ordersDBDAO.delOrder(1005);
 		
 		System.out.println("------------------------------------");
 		System.out.println("1. We already have " + ordersDB0.getOrdersDBSize() + " orders in RAM.");
 		System.out.println("------------------------------------");
 				
-		// just for testing. I simulate process of creating of order and adding that order to ordersDB. 
-		try {ordersDB0.orderAdd(OperatorSimple.orderCreateTemp());} catch (OrderException e) {}
-		try {ordersDB0.orderAdd(OperatorSimple.orderCreateTemp());} catch (OrderException e) {}
-		try {ordersDB0.orderAdd(OperatorSimple.orderCreateTemp());} catch (OrderException e) {}
-
+//		// just for testing. I simulate process of creating of order and adding that order to ordersDB. 
+//		try {ordersDB0.orderAdd(OperatorSimple.orderCreateTemp());} catch (OrderException e) {}
+//		try {ordersDB0.orderAdd(OperatorSimple.orderCreateTemp());} catch (OrderException e) {}
+//		try {ordersDB0.orderAdd(OperatorSimple.orderCreateTemp());} catch (OrderException e) {}
+//
 		man1.doReportWithOrders();
 		System.out.println("------------------------------------");
 		System.out.println("2. We already have " + ordersDB0.getOrdersDBSize() + " orders in RAM.");
 		System.out.println("------------------------------------");
 		
 
-		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
-		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
-		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
-		
-	
+// +Adding order to MySQL DB. WORKS
+//		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
+//		ordersDBDAO.addToOrdersDB(OperatorSimple.orderCreateTemp());
 		
 		
+		
+		ordersDBDAO.closeSessionFactory();
+		
+			
 	}
 }

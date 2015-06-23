@@ -12,7 +12,7 @@ public class Order implements java.io.Serializable{
 	private static final long serialVersionUID = 3714126590731329262L;
 	
 
-	private int id;
+	private Integer id;
 	private Timestamp dateAndTime;
 	private String addr1, addr2, addr34;
 	private float distance;
@@ -50,11 +50,11 @@ public class Order implements java.io.Serializable{
 	}
 	
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(int orderNum) {
+	public void setId(Integer orderNum) {
 		this.id = orderNum;
 	}
 	

@@ -11,6 +11,8 @@ public abstract class OrderDAOabstract {
 	public abstract void updateOrder(Order order);
 	public abstract void updateOrder(int id);
 	public abstract void delOrder(int id);
+	public void closeSessionFactory() {}
+	public Order findById(int id) {return null;}
 
 	
 }

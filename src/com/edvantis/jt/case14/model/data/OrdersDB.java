@@ -38,11 +38,9 @@ public class OrdersDB implements OrdersDBInterface{
 	public void orderAdd(Order order) throws OrderException {
 		OrderValidator.orderDataIsValid(order);
 		orders.add(order);
-
-		orders.get(orders.indexOf(order)).setId(orders.indexOf(order));			// orderNumber = indexOf that object
-		// here need to add command to save new order to DB 
 	}
 
+	
 	public void orderDel(int id) {
 		for(Order o: orders){
 			if (o.getId()==id) orders.remove(o);

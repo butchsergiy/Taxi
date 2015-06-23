@@ -3,13 +3,15 @@ package com.edvantis.jt.case14.dao.hibernate;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.HibernateException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+import org.hibernate.criterion.Example;
 
 import com.edvantis.jt.case14.dao.OrderDAOabstract;
 import com.edvantis.jt.case14.exceptions.OrderException;
@@ -17,158 +19,266 @@ import com.edvantis.jt.case14.model.data.Order;
 import com.edvantis.jt.case14.model.data.OrdersDB;
 
 
+
+
+
 public class OrderDAOHibernate extends OrderDAOabstract {
-		
-//	Session s = sf.openSession();
-//	Transaction tx = s.beginTransaction();
-//	
-//	Order o = new Order();
-//	o = OperatorSimple.orderCreateTemp();
-//	try {OrderValidator.orderDataIsValid(o);} catch (OrderException e) {e.printStackTrace();}
-//	
-//	s.save(o);
-//	s.flush();
-//	tx.commit();
-//	s.clear();
-//	sf.close();
+
+	private static   OrderDAOHibernate singleton;
 	
-	// Private constructor for Singleton
-	private OrderDAOHibernate(){
-		}		
-	
-	public static OrderDAOHibernate getReference(){
-		return singleton;
+	private OrderDAOHibernate(){		
 	}
 	
-	private static final OrderDAOHibernate singleton = new OrderDAOHibernate();   		// Singleton
+	public static synchronized OrderDAOHibernate getReference(){
+		if (singleton == null) {
+			singleton = new OrderDAOHibernate();
+        }
+ 		return singleton;
+	}
 	
-	Configuration cfg = new Configuration();
+		
+	OrdersDB ordersDB0 = OrdersDB.getReference();
 	
-	{cfg.configure();}  //"hibernate2.cfg.xml"
-	
-	
-	ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
-	SessionFactory sf = cfg.buildSessionFactory(serviceRegistry);
-	
-	
-	
-	
-	/* 
-	 * Method to CREATE an order in the database 
-	 */
-	@Override
-	public void addToOrdersDB(Order o) {
-	      Session session = sf.openSession();
-	      Transaction tx = null;
-	      
-	      try{
-	         tx = session.beginTransaction();
-	         
-//	         ID = (Integer) session.save(o); 
-	         session.save(o);
-	         
-	         tx.commit();
-	      }catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }finally {
-	         session.close(); 
+	private static final Log log = LogFactory.getLog(OrderDAOHibernate.class);
+
+
+	private static SessionFactory sessionFactory = buildSessionFactory();
+	 
+	   private static SessionFactory buildSessionFactory() {
+	      try {
+	         if (sessionFactory == null){
+				Configuration configuration = new Configuration().configure();
+				StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+				SessionFactory  sessionFactory = configuration.buildSessionFactory(serviceRegistryBuilder.build());
+	        	return sessionFactory;
+	         }
+	         return sessionFactory;
+	      } catch (Throwable ex){
+	         System.err.println(" \nXxXXxxxxXXXxxx Initial SessionFactory creation failed." + ex);
+	         throw new ExceptionInInitializerError(ex);
 	      }
+	   }
+	 
+	   public static SessionFactory getSessionFactory(){
+	      return sessionFactory;
+	   }
+	 
+	   public static void shutdown(){
+	      getSessionFactory().close();
 	   }
 
+
+	   Session session = null;
+	 
+	   Transaction transaction = null;
+	   
+
+			
 	
+	//WORKS
+	@Override
+	public Order findById(int id) {
+		log.debug("getting Order instance with id: " + id);
+		try {
+			session = sessionFactory.openSession();			
+			transaction = session.beginTransaction();
+			
+			Order instance = (Order) session.get("com.edvantis.jt.case14.model.data.Order", id);
+			if (instance == null) {
+				log.debug("get successful, no instance found");
+			} else {
+				log.debug("get successful, instance found");
+			}
+			return instance;
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+		}
 	
-	   /* Method to  READ all orders from DB MySQL *///////////////////////////////////////xxxxxxxxxxxxxxxxxxxxxxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	//WORKS
+	@Override
+	public void addToOrdersDB(Order o) {
+		try {
+			session = sessionFactory.openSession();			
+			transaction = session.beginTransaction();
+			session.save(o);
+			session.flush();
+			transaction.commit();
+			System.out.println("Order is Saved");
+			log.debug("attach successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			throw re;
+		}
+		  finally{			  
+	        session.close();        
+	    }
+	    }
+		
+		
+	/*
+	 * WORKS
+	 */
 	@Override
 	public void readAllordersDB() {
-	      Session session = sf.openSession();
-	      Transaction tx = null;
-	      OrdersDB orderDB = OrdersDB.getReference();
-	      
-	      try{
-	         tx = session.beginTransaction();
-	         List<Order> list = session.createQuery("FROM ordersdb").list();    //////////////?????????????   org.hibernate.hql.internal.ast.QuerySyntaxException: ordersdb is not mapped [FROM ordersdb]
-	         
-	        
-	         for (Iterator iterator = list.iterator(); iterator.hasNext();){
-	            Order o = (Order) iterator.next(); 
-	            orderDB.orderAdd(o);
-	            System.out.println("Order # " + o.getId()); 
-	            System.out.println("Order time: " + o.getDateAndTime()); 
-	            System.out.println("Order Addres" + o.getAddr1()); 
-	            System.out.println("Order Addres" + o.getAddr2());
-	         }
-	         tx.commit();
-	      }catch (HibernateException | OrderException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }finally {
-	         session.close(); 
-	      }
-	   }
-	   
-	   
-	   
-	   /* Method to UPDATE order */
-	   @Override
-//		public void updateOrder(int id) {
-		public void updateOrder(Order order) {
-	      Session session = sf.openSession();
-	      Transaction tx = null;
-	      try{
-	         tx = session.beginTransaction();
-	         Order or =(Order)session.get(Order.class, order.getId());   /////xxxxxxxxxxxxxxxxxxxxxxxxxxx
-	         session.update(or); 
-	         tx.commit();
-	      }catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }finally {
-	         session.close(); 
-	      }
-	   }
-	   
-	   
-	   	@Override
+			session = sessionFactory.openSession();			
+			transaction = session.beginTransaction();
+			Order o;
+		try {
+			List orderss = session.createQuery("FROM Order").list(); 	
+			for (Iterator it=orderss.iterator(); it.hasNext();){
+				o=(Order)it.next();
+				ordersDB0.orderAdd(o);
+				System.out.println("Order ("+o.getId()+") date: "+o.getDateAndTime());
+				}
+			transaction.commit();
+		} 
+		catch (RuntimeException | OrderException re) {
+			log.error("attach failed", re);
+//			throw re;
+			System.out.println(re.getMessage());
+		}
+		finally{			  
+	        session.close();        
+	    }
+		}
+		
+		
+	/*
+	 * WORKS
+	 */
+	@Override
+	public void delOrder(int id) {
+		try {
+			session = sessionFactory.openSession();			
+			transaction = session.beginTransaction();
+			
+			Order o = (Order) session.get(Order.class, id);
+
+			System.out.print("Deleting Order #"+id+" ... ");
+			
+			if (o == null) {
+				log.debug("get successful, no instance found");
+				System.out.println("get successful, no instance found in DB");
+			} else {
+				session.delete(o);
+				transaction.commit();
+				log.debug("get successful, instance found and deleted");
+				System.out.println("get successful, instance found and deleted from DB");
+			}
+		
+		} catch (RuntimeException  re) {
+			log.error("del failed", re);
+			System.out.println("del failed"+ re.getMessage());
+			throw re;
+		}
+		}
+	
+	@Override
 	public void updateOrder(int id) {
 		// TODO Auto-generated method stub
 		
 	}
-	   
-	   
-	   /* Method to DELETE an order from the records */
-	   @Override
-		public void delOrder(int id){
-	      Session session = sf.openSession();
-	      Transaction tx = null;
-	      try{
-	         tx = session.beginTransaction();
-	         Order order = (Order)session.get(Order.class, id); 
-	         session.delete(order); 
-	         tx.commit();
-	      }catch (HibernateException e) {
-	         if (tx!=null) tx.rollback();
-	         e.printStackTrace(); 
-	      }finally {
-	         session.close(); 
-	      }
-	   }
-	   
-	   
+	
+	@Override
+	public void updateOrder(Order order) {
+		// TODO Auto-generated method stub
+	}
+	
+	
+	@Override
+	public void closeSessionFactory() {
+		sessionFactory.close();
+	}
+	
+	
+	
+/*
+ *  next method are just for testing
+ *  	
+ */
+	
+	public void attachDirty(Order o) {
+		log.debug("attaching dirty Order instance");
+		transaction = session.beginTransaction();
+		
+		try {
+			sessionFactory.getCurrentSession().saveOrUpdate(o);
+			 transaction.commit();
+			log.debug("attach successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			throw re;
+		}
+	}
 
+	
+	
+	public void attachClean(Order o) {
+		log.debug("attaching clean Order instance");
+		try {
+			sessionFactory.getCurrentSession().lock(o, LockMode.NONE);
+			log.debug("attach successful");
+		} catch (RuntimeException re) {
+			log.error("attach failed", re);
+			throw re;
+		}
+	}
+	
+	
 
+	public void persist(Order o) {
+		log.debug("persisting Order instance");
+		try {
+			sessionFactory.getCurrentSession().persist(o);
+			log.debug("persist successful");
+		} catch (RuntimeException re) {
+			log.error("persist failed", re);
+			throw re;
+		}
+	}
 
+	
+
+	public void delete(Order o) {
+		log.debug("deleting Order instance");
+		try {
+			sessionFactory.getCurrentSession().delete(o);
+			log.debug("delete successful");
+		} catch (RuntimeException re) {
+			log.error("delete failed", re);
+			throw re;
+		}
+	}
+
+	public Order merge(Order o) {
+		log.debug("merging Order instance");
+		try {
+			Order result = (Order) sessionFactory.getCurrentSession().merge(o);
+			log.debug("merge successful");
+			return result;
+		} catch (RuntimeException re) {
+			log.error("merge failed", re);
+			throw re;
+		}
+	}
 
 
 
 	
-
-
-
-	
-
+	public List<Order> findByExample(Order o) {
+		log.debug("finding Order instance by example");
+		try {
+			List<Order> results = sessionFactory.getCurrentSession().createCriteria("com.edvantis.jt.case14.model.data.Order").add(Example.create(o)).list();
+			log.debug("find by example successful, result size: "+ results.size());
+			return results;
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
 	
 	
 	
 }
-

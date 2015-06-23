@@ -1,8 +1,8 @@
 package com.edvantis.jt.case14.dao.factory;
 
 import com.edvantis.jt.case14.dao.OrderDAOabstract;
+import com.edvantis.jt.case14.dao.hibernate.OrderDAOHibernate3;
 import com.edvantis.jt.case14.dao.hibernate.OrderDAOHibernate;
-import com.edvantis.jt.case14.dao.hibernate.OrderDAOHibernate2;
 import com.edvantis.jt.case14.dao.mysql.OrdersDBDAOJBDC;
 
 public class OrderDAOFactory {
@@ -13,7 +13,7 @@ public class OrderDAOFactory {
 		
 		if(ormType.equalsIgnoreCase("hibernate")) return OrderDAOHibernate.getReference();	
 		
-		if(ormType.equalsIgnoreCase("hibernate2")) return OrderDAOHibernate2.getReference();
+		if(ormType.equalsIgnoreCase("hibernate2")) return OrderDAOHibernate3.getReference();  	// JUST FOR TESTING
 		
 		return null;
 	}
